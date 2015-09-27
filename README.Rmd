@@ -1,22 +1,17 @@
-Set working directory
-
-```{r}
-dir.create("Project")
-setwd("./Project")
-```
 
 Load required packages
 
 ```{r}
 library(data.table)
 library(plyr)
+library(knitr)
 ```
 
 ##1. Merge the training and the test sets to create one data set
 ####Get the Data 
 Step1. Download the file
 ```{r}
-fileUrl<- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+fileUrl<- "http://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 download.file(fileUrl, destfile="./Dataset.zip", mode="wb")
 ```
 Step2. Unzip dataset in a /Project directory and list all files
@@ -59,7 +54,6 @@ names(dFeatures) <- dFeaturesNames$V2
 ```{r}
 SubjectActivity<- cbind(dSubject, dActivity)
 Data<- cbind(dFeatures, SubjectActivity)
-str(Data)
 ```
 
 ##(2) Extract only the measurements on the mean and standard deviation for each measurement
@@ -126,6 +120,5 @@ names(Data)
 ## (5) Create a second, independent tidy data set with the average of each variable for each activity and each subject
 ```{r}
 Data2<-aggregate(. ~Subject + Activity, Data, mean) 
-Data2
 ```
 This data set a is set of variables for each activity and subject. As there are 30 subjects and 6 ativities, initial 10299 observations were split into 180 groups. The data set provides average mean and standard deviation features for each group. 
