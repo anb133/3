@@ -1,8 +1,3 @@
----
-title: "README.md"
-output: html_document
----
-
 Set working directory
 
 ```{r}
